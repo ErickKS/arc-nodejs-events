@@ -3,13 +3,15 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function seed() {
-  await prisma.user.deleteMany()
+  await prisma.event.deleteMany()
+  await prisma.ticket.deleteMany()
 
-  await prisma.user.create({
+  await prisma.event.create({
     data: {
-      name: 'John Doe',
-      email: 'john.doe@email.com',
-      password: '123456',
+      id: 'eaabc75c-a825-4f26-b666-9040427141a1',
+      name: 'Software Arch',
+      description: 'Event for the best developers',
+      price: 100,
     },
   })
 

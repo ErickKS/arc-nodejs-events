@@ -7,11 +7,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       String @id @default(uuid())
-  name     String
-  email    String @unique
-  password String
+model Event {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  price       Decimal
+  tickets     Ticket[]
 
-  @@map("users")
+  @@map("events")
+}
+
+model Ticket {
+  id      String @id @default(uuid())
+  email   String
+  eventId String
+
+  event Event @relation(fields: [eventId], references: [id])
+
+  @@map("tickets")
 }
