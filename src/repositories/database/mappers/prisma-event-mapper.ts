@@ -5,7 +5,11 @@ export class PrismaEventMapper {
   private constructor() {}
 
   static toDomain(raw: PrismaEvent): Event {
-    return Event.create(raw.name, raw.description, Number(raw.price))
+    return Event.create({
+      name: raw.name,
+      description: raw.description,
+      price: Number(raw.price),
+    })
   }
 
   static toPrisma(event: Event): Prisma.EventUncheckedCreateInput {

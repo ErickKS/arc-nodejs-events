@@ -6,8 +6,12 @@ import { PrismaService } from './prisma-service'
 export class PrismaEventRepository implements EventRepository {
   constructor(private prisma: PrismaService) {}
 
-  create(event: Event): Promise<void> {
-    throw new Error('Method not implemented.')
+  async create(event: Event): Promise<void> {
+    const data = PrismaEventMapper.toPrisma(event)
+
+    await this.prisma.event.create({
+      data,
+    })
   }
 
   async findById(id: string): Promise<Event | null> {

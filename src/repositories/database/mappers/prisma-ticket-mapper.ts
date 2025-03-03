@@ -5,7 +5,7 @@ export class PrismaTicketMapper {
   private constructor() {}
 
   static toDomain(raw: PrismaTicket): Ticket {
-    return Ticket.create(raw.eventId, raw.email)
+    return Ticket.create({ eventId: raw.eventId, email: raw.email })
   }
 
   static toPrisma(ticket: Ticket): Prisma.TicketUncheckedCreateInput {
