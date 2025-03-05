@@ -15,6 +15,14 @@ export class PrismaTicketRepository implements TicketRepository {
   }
 
   async findById(id: string): Promise<Ticket | null> {
-    throw new Error('Method not implemented.')
+    const ticket = await this.prisma.ticket.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    if (!ticket) return null
+
+    return PrismaTicketMapper.toDomain(ticket)
   }
 }
